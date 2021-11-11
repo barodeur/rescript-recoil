@@ -62,10 +62,9 @@ external atomWithEffectsFromRecoilValue: atomWithEffectsConfig<
 > => Recoil__Value.readWrite<'value> = "atom"
 
 @module("recoil")
-external atomWithDangerouslyAllowMutability:
-  atomWithDangerouslyAllowMutabilityConfig<'value> =>
-  Recoil__Value.readWrite<'value> =
-  "atom";
+external atomWithDangerouslyAllowMutability: atomWithDangerouslyAllowMutabilityConfig<
+  'value,
+> => Recoil__Value.readWrite<'value> = "atom"
 
 @module("recoil")
 external atomFamily: atomFamilyConfig<'parameter, 'value> => atomFamily<

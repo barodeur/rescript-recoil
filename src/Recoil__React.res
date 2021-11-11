@@ -28,109 +28,98 @@ external useResetRecoilState: Recoil__Value.readWrite<'value> => reset = "useRes
 external useRecoilValueLoadable: Recoil__Value.t<'value, 'mode> => Recoil__Loadable.t<'value> =
   "useRecoilValueLoadable"
 
-type mutableSnapshot = {
-  set: 'value 'mode. (Recoil__Value.t<'value, 'mode>, 'value => 'value) => unit,
-  reset: 'value 'mode. Recoil__Value.t<'value, 'mode> => unit,
-}
-
-type rec snapshot = {
-  getPromise: 'value 'mode. Recoil__Value.t<'value, 'mode> => Js.Promise.t<'value>,
-  getLoadable: 'value 'mode. Recoil__Value.t<'value, 'mode> => Recoil__Loadable.t<'value>,
-  map: (mutableSnapshot => unit) => snapshot,
-  asyncMap: (mutableSnapshot => Js.Promise.t<unit>) => Js.Promise.t<snapshot>,
-}
-
-type callbackParam = {
-  snapshot: snapshot,
-  gotoSnapshot: snapshot => unit,
-  set: 'value. (Recoil__Value.readWrite<'value>, 'value => 'value) => unit,
-  reset: 'value. Recoil__Value.readWrite<'value> => unit,
-}
-
-type callback<'additionalArg, 'returnValue> = 'additionalArg => 'returnValue
-
 @module("recoil")
 external useRecoilCallback: (
-  @uncurry (callbackParam => callback<'additionalArg, 'returnValue>)
-) => callback<'additionalArg, 'returnValue> = "useRecoilCallback"
+  @uncurry (
+    Recoil__Callback.callbackParam => Recoil__Callback.callback<'additionalArg, 'returnValue>
+  )
+) => Recoil__Callback.callback<'additionalArg, 'returnValue> = "useRecoilCallback"
 
 @module("recoil")
 external useRecoilCallback0: (
-  @uncurry (callbackParam => callback<'additionalArg, 'returnValue>),
+  @uncurry (
+    Recoil__Callback.callbackParam => Recoil__Callback.callback<'additionalArg, 'returnValue>
+  ),
   @as(json`[]`) _,
-) => callback<'additionalArg, 'returnValue> = "useRecoilCallback"
+) => Recoil__Callback.callback<'additionalArg, 'returnValue> = "useRecoilCallback"
 
 @module("recoil")
 external useRecoilCallback1: (
-  @uncurry (callbackParam => callback<'additionalArg, 'returnValue>),
+  @uncurry (
+    Recoil__Callback.callbackParam => Recoil__Callback.callback<'additionalArg, 'returnValue>
+  ),
   array<'a>,
-) => callback<'additionalArg, 'returnValue> = "useRecoilCallback"
+) => Recoil__Callback.callback<'additionalArg, 'returnValue> = "useRecoilCallback"
 
 @module("recoil")
 external useRecoilCallback2: (
-  @uncurry (callbackParam => callback<'additionalArg, 'returnValue>),
+  @uncurry (
+    Recoil__Callback.callbackParam => Recoil__Callback.callback<'additionalArg, 'returnValue>
+  ),
   ('a, 'b),
-) => callback<'additionalArg, 'returnValue> = "useRecoilCallback"
+) => Recoil__Callback.callback<'additionalArg, 'returnValue> = "useRecoilCallback"
 
 @module("recoil")
 external useRecoilCallback3: (
-  @uncurry (callbackParam => callback<'additionalArg, 'returnValue>),
+  @uncurry (
+    Recoil__Callback.callbackParam => Recoil__Callback.callback<'additionalArg, 'returnValue>
+  ),
   ('a, 'b, 'c),
-) => callback<'additionalArg, 'returnValue> = "useRecoilCallback"
+) => Recoil__Callback.callback<'additionalArg, 'returnValue> = "useRecoilCallback"
 
 @module("recoil")
 external useRecoilCallback4: (
-  @uncurry (callbackParam => callback<'additionalArg, 'returnValue>),
+  @uncurry (Recoil__Callback.callbackParam => Recoil__Callback.callback<'additionalArg, 'returnValue>),
   ('a, 'b, 'c, 'd),
-) => callback<'additionalArg, 'returnValue> = "useRecoilCallback"
+) => Recoil__Callback.callback<'additionalArg, 'returnValue> = "useRecoilCallback"
 
 @module("recoil")
 external useRecoilCallback5: (
-  @uncurry (callbackParam => callback<'additionalArg, 'returnValue>),
+  @uncurry (Recoil__Callback.callbackParam => Recoil__Callback.callback<'additionalArg, 'returnValue>),
   ('a, 'b, 'c, 'd, 'e),
-) => callback<'additionalArg, 'returnValue> = "useRecoilCallback"
+) => Recoil__Callback.callback<'additionalArg, 'returnValue> = "useRecoilCallback"
 
 module Uncurried = {
   type uncurriedCallback<'additionalArg, 'returnValue> = (. 'additionalArg) => 'returnValue
 
   @module("recoil")
   external useRecoilCallback: (
-    @uncurry (callbackParam => callback<'additionalArg, 'returnValue>)
+    @uncurry (Recoil__Callback.callbackParam => Recoil__Callback.callback<'additionalArg, 'returnValue>)
   ) => uncurriedCallback<'additionalArg, 'returnValue> = "useRecoilCallback"
 
   @module("recoil")
   external useRecoilCallback0: (
-    @uncurry (callbackParam => callback<'additionalArg, 'returnValue>),
+    @uncurry (Recoil__Callback.callbackParam => Recoil__Callback.callback<'additionalArg, 'returnValue>),
     @as(json`[]`) _,
   ) => uncurriedCallback<'additionalArg, 'returnValue> = "useRecoilCallback"
 
   @module("recoil")
   external useRecoilCallback1: (
-    @uncurry (callbackParam => callback<'additionalArg, 'returnValue>),
+    @uncurry (Recoil__Callback.callbackParam => Recoil__Callback.callback<'additionalArg, 'returnValue>),
     array<'a>,
   ) => uncurriedCallback<'additionalArg, 'returnValue> = "useRecoilCallback"
 
   @module("recoil")
   external useRecoilCallback2: (
-    @uncurry (callbackParam => callback<'additionalArg, 'returnValue>),
+    @uncurry (Recoil__Callback.callbackParam => Recoil__Callback.callback<'additionalArg, 'returnValue>),
     ('a, 'b),
   ) => uncurriedCallback<'additionalArg, 'returnValue> = "useRecoilCallback"
 
   @module("recoil")
   external useRecoilCallback3: (
-    @uncurry (callbackParam => callback<'additionalArg, 'returnValue>),
+    @uncurry (Recoil__Callback.callbackParam => Recoil__Callback.callback<'additionalArg, 'returnValue>),
     ('a, 'b, 'c),
   ) => uncurriedCallback<'additionalArg, 'returnValue> = "useRecoilCallback"
 
   @module("recoil")
   external useRecoilCallback4: (
-    @uncurry (callbackParam => callback<'additionalArg, 'returnValue>),
+    @uncurry (Recoil__Callback.callbackParam => Recoil__Callback.callback<'additionalArg, 'returnValue>),
     ('a, 'b, 'c, 'd),
   ) => uncurriedCallback<'additionalArg, 'returnValue> = "useRecoilCallback"
 
   @module("recoil")
   external useRecoilCallback5: (
-    @uncurry (callbackParam => callback<'additionalArg, 'returnValue>),
+    @uncurry (Recoil__Callback.callbackParam => Recoil__Callback.callback<'additionalArg, 'returnValue>),
     ('a, 'b, 'c, 'd, 'e),
   ) => uncurriedCallback<'additionalArg, 'returnValue> = "useRecoilCallback"
 }
